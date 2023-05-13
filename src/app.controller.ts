@@ -7,9 +7,11 @@ import {
   ParseBoolPipe,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ChatService } from './chat/chat.service';
 import * as rawbody from 'raw-body';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 export const PlainBody = createParamDecorator(async (data, req) => {
   if (!req.args[0].readable) {
@@ -22,6 +24,7 @@ export const PlainBody = createParamDecorator(async (data, req) => {
   return (await rawbody(req.args[0])).toString().trim();
 });
 
+@UseGuards(AuthGuard)
 @Controller()
 export class AppController {
   constructor(private readonly sentenceService: ChatService) {}
