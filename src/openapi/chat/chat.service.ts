@@ -29,7 +29,7 @@ export class ChatService {
     const response = await this.openAi.createChatCompletion({
       model: 'gpt-4',
       messages: [...history, formattedMessage],
-      max_tokens: 500,
+      max_tokens: 20000,
     });
 
     const firstChoice = response.data.choices[0];
