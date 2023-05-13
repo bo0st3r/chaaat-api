@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "8e33f273-0206-41be-be51-e3c764e660d2",
+		"name": "Chaaat-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15450427"
+	},
+	"item": [
+		{
+			"name": "Chat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Can you confirm this function should work and edit it if needed? If you change the logic, provide a short and optimized solution. dont make it too complicated.\n\nThe goal is to see if an are and a line are overlapping anyhow on a 2D plan.\n\ndef intersects(area, line):\n    \"\"\"Determine if a line and a area are intersecting\n\n    Args:\n        area (object): An object with 'leftMostX', 'rightMostX', 'topMostY', and 'bottomMostY' attributes representing the area's bounds.\n        line (dict): A dictionary containing keys 'x1', 'y1', 'x2', and 'y2' representing the line's two endpoints.\n\n    Returns:\n        bool: True if the line and area intersect, False otherwise.\n    \"\"\"\n    return not (line['x2'] < area.leftMostX or line['x1'] > area.rightMostX or line['y1'] > area.bottomMostY or line['y2'] < area.topMostY)",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/chat?reset=false",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"chat"
+					],
+					"query": [
+						{
+							"key": "reset",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/history",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"history"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
