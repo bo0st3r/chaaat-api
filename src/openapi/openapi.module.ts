@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { Configuration, OpenAIApi } from 'openai';
-import { ChatService } from './chat/chat.service';
+import { CompletionService } from './completion/completion.service';
 
 function provideOpenAIApi(): OpenAIApi {
   const configuration = new Configuration({
@@ -16,12 +16,12 @@ function provideOpenAIApi(): OpenAIApi {
 @Module({
   imports: [ConfigModule.forRoot()],
   providers: [
-    ChatService,
+    CompletionService,
     {
       provide: OpenAIApi,
       useValue: provideOpenAIApi(),
     },
   ],
-  exports: [ChatService],
+  exports: [CompletionService],
 })
 export class OpenAPIModule {}

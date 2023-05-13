@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   createParamDecorator,
   Get,
@@ -8,10 +7,8 @@ import {
   ParseBoolPipe,
   Post,
   Query,
-  RawBodyRequest,
-  Req,
 } from '@nestjs/common';
-import { SentenceService } from './sentence/sentence.service';
+import { ChatService } from './chat/chat.service';
 import * as rawbody from 'raw-body';
 
 export const PlainBody = createParamDecorator(async (data, req) => {
@@ -27,24 +24,28 @@ export const PlainBody = createParamDecorator(async (data, req) => {
 
 @Controller()
 export class AppController {
-  constructor(private readonly sentenceService: SentenceService) {}
+  constructor(private readonly sentenceService: ChatService) {}
 
   @Post('chat')
-  async generateSentences(
+  async sendMessage(
     @PlainBody() message: string,
-    //@PlainBody() message: string,
     @Query('reset', ParseBoolPipe) reset?: boolean,
   ): Promise<string> {
     if (reset) {
-      await this.sentenceService.resetHistory();
+      await this.sentenceService.reset();
     }
 
     try {
-      return await this.sentenceService.generateSentences(message);
+      return await this.sentenceService.send(message);
     } catch (error) {
       console.error(error);
       return 'Error';
     }
+  }
+
+  @Get('reset')
+  resetChat(): void {
+    this.sentenceService.reset();
   }
 
   @Get('history')
