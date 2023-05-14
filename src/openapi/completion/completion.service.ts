@@ -29,7 +29,6 @@ export class CompletionService {
     const model = process.env['CHAT_COMPLETION_MODEL'] || 'gpt-4';
     const maxTokens = Number(process.env['CHAT_COMPLETION_MAX_TOKENS']) || 8160;
 
-    console.log(model, maxTokens);
     const response = await this.openAi.createChatCompletion({
       model,
       messages: [...history, formattedMessage],
