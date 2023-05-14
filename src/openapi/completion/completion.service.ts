@@ -32,7 +32,7 @@ export class CompletionService {
     const response = await this.openAi.createChatCompletion({
       model,
       messages: [...history, formattedMessage],
-      max_tokens: maxTokens,
+      //max_tokens: maxTokens,
     });
 
     const firstChoice = response.data.choices[0];
